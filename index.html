@@ -16,7 +16,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column; /* Added to stack elements vertically */
+      flex-direction: column;
     }
 
     canvas {
@@ -24,13 +24,32 @@
     }
 
     #track {
-      margin-top: 20px; /* Added some space between video and track display */
-      font-size: 24px; /* Increased font size for better visibility */
+      margin-top: 20px;
+      font-size: 24px;
+    }
+
+    .button-container {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Style for the "on" state */
+    button.on {
+      background-color: green;
+      color: white;
     }
   </style>
 </head>
 <body>
   <video id="video" width="720" height="560" autoplay muted></video>
-  <div id="track"></div> <!-- Display track value here -->
+  <div id="track"></div>
+  <div class="button-container">
+    <button id="toggleButton">Robot</button>
+  </div>
 </body>
 </html>

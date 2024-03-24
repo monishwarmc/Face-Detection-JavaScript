@@ -3,9 +3,14 @@ let lastExpressionValue = 0;
 let lastChangeTimestamp = Date.now();
 let uri = '';
 
-//  https://blr1.blynk.cloud/external/api/update?token=tKcpaAIuZEhTbnifU8GtKaHhLvff9KjH
-
 const trackElement = document.getElementById('track');
+const toggleButton = document.getElementById('toggleButton');
+
+toggleButton.addEventListener('click', () => {
+  uri = uri === '' ? 'https://blr1.blynk.cloud/external/api/update?token=tKcpaAIuZEhTbnifU8GtKaHhLvff9KjH' : '';
+  toggleButton.classList.toggle('on', uri !== ''); 
+  console.log('uri:', uri);
+});
 
 const video = document.getElementById('video')
 
@@ -42,45 +47,47 @@ video.addEventListener('play', () => {
       if (expressionValue > 0.8 && expressionValue < 1.0) {
         // Call your function for non-neutral expression
         // Perform fetch request
-      fetch(uri + '&V1=0')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log('Fetch success:', data);
-        })
-        .catch(error => {
-          console.error('Fetch error:', error);
-        });
+        if (uri !== '') {
+          fetch(uri + '&V1=0')
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then(data => {
+              console.log('Fetch success:', data);
+            })
+            .catch(error => {
+              console.error('Fetch error:', error);
+            });
+        }
         track = "close";
         console.log('close');
       } else if (expressionValue < 0.8 && expressionValue > 0) {
         // Call your function for neutral expression
         // Perform fetch request
-      fetch(uri + '&V1=1')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        if (uri !== '') {
+          fetch(uri + '&V1=1')
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then(data => {
+              console.log('Fetch success:', data);
+            })
+            .catch(error => {
+              console.error('Fetch error:', error);
+            });
         }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Fetch success:', data);
-      })
-      .catch(error => {
-        console.error('Fetch error:', error);
-      });
         track = "open";
         console.log('open');
       } else {
         track = "no detection";
         console.log('no detection');
       }
-
-
 
       // Update last change timestamp and last expression value
       lastChangeTimestamp = Date.now();
