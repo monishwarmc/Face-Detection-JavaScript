@@ -48,7 +48,7 @@ video.addEventListener('play', () => {
         // Call your function for non-neutral expression
         // Perform fetch request
         if (uri !== '') {
-          fetch(uri + '&V1=0')
+          fetch(uri + '&V0=0')
             .then(response => {
               if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -68,7 +68,7 @@ video.addEventListener('play', () => {
         // Call your function for neutral expression
         // Perform fetch request
         if (uri !== '') {
-          fetch(uri + '&V1=1')
+          fetch(uri + '&V0=1')
             .then(response => {
               if (!response.ok) {
                 throw new Error('Network response was not ok');
