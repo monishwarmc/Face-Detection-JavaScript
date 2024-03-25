@@ -43,7 +43,7 @@ video.addEventListener('play', () => {
 
     // Check if the expression is neutral
     const expressionValue = resizedDetections[0]?.expressions['neutral'] || 0
-    if (Math.abs(expressionValue - lastExpressionValue) > 0.1 && Date.now() - lastChangeTimestamp >= 3000) {
+    if (Math.abs(expressionValue - lastExpressionValue) > 0.1 && Date.now() - lastChangeTimestamp >= 1000) {
       if (expressionValue > 0.8 && expressionValue < 1.0) {
         // Call your function for non-neutral expression
         // Perform fetch request
